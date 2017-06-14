@@ -24,12 +24,12 @@ void StateMachine::Draw(Renderer2D* m_2dRenderer)
 	m_StateList[m_nCurrentState]->OnDraw(m_2dRenderer);
 }
 
-void StateMachine::SetState(int nStateIndex)
+void StateMachine::PushState(int nStateIndex)
 {
 
 }
 
-void StateMachine::AddState(State* state, int nStateIndex)
+void StateMachine::RegisterState(State* state, int nStateIndex)
 {
 
 }

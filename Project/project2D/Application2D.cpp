@@ -48,8 +48,8 @@ bool Application2D::startup()
 	m_pResourceMan = new ResourceManager<Texture>();
 
 	m_pStateMachine = new StateMachine();
-	m_pStateMachine->AddState(new Menu(), EGAMESTATE_MENU);
-	m_pStateMachine->AddState(new GameState(), EGAMESTATE_MENU);
+	m_pStateMachine->PushState(new Menu(), EGAMESTATE_MENU);
+	m_pStateMachine->PushState(new GameState(), EGAMESTATE_MENU);
 
 	//This creates the collision manager
 	CollisionManager::Create();

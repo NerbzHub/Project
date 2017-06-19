@@ -14,6 +14,7 @@ public:
 	void Draw(Renderer2D* m_2dRenderer);
 	void PushState(int nStateIndex);
 	void RegisterState(State* state, int nStateIndex);
+	
 
 private:
 	DynamicArray<State*> m_StateList;

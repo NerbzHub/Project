@@ -17,8 +17,12 @@
 
 enum GameStateType
 {
-	EGAMESTATE_MENU = 0, 
-	EGAMESTATE_GAME
+	EGAMESTATE_MENU = 0,
+	EGAMESTATE_GAME = 1,
+	EGAMESTATE_OPTIONS = 2,
+	EGAMESTATE_AUDIOOPTIONS = 3,
+	EGAMESTATE_GRAPHICOPTIONS = 4,
+	EGAMESTATE_CONTROLOPTIONS = 5
 
 };
 //--------------------------------------------------------------------------------------

@@ -44,12 +44,24 @@ Application2D::~Application2D()
 //--------------------------------------------------------------------------------------
 bool Application2D::startup() 
 {
+	Menu* menu = new Menu();
+	GameState* gameState = new GameState();
+	while (EGAMESTATE_MENU)
+	{
+		menu->OnDraw(m_2dRenderer);
+	}
+
+	while (EGAMESTATE_GAME)
+	{
+		gameState->OnDraw(m_2dRenderer);
+	}
+
 	// Use this to create the Character Texture
 	m_pResourceMan = new ResourceManager<Texture>();
 
 	m_pStateMachine = new StateMachine();
-	m_pStateMachine->PushState(new Menu(), EGAMESTATE_MENU);
-	m_pStateMachine->PushState(new GameState(), EGAMESTATE_MENU);
+	m_pStateMachine->PushState(EGAMESTATE_MENU);
+	m_pStateMachine->PushState(EGAMESTATE_GAME);
 
 	//This creates the collision manager
 	CollisionManager::Create();

@@ -6,23 +6,22 @@
 #include "Application.h"
 #include "Renderer2D.h"
 #include "Audio.h"
-#include "Player.h"
-#include "Block.h"
-#include "Environment.h"
 #include "ResourceManager.h"
 #include "StateMachine.h"
 #include "GameState.h"
 #include "State.h"
+#include "Stack.h"
 
 
 enum GameStateType
 {
-	EGAMESTATE_MENU = 0,
-	EGAMESTATE_GAME = 1,
-	EGAMESTATE_OPTIONS = 2,
-	EGAMESTATE_AUDIOOPTIONS = 3,
-	EGAMESTATE_GRAPHICOPTIONS = 4,
-	EGAMESTATE_CONTROLOPTIONS = 5
+	EGAMESTATE_SPLASH = 0,
+	EGAMESTATE_MENU = 1,
+	EGAMESTATE_GAME = 2,
+	EGAMESTATE_OPTIONS = 3,
+	EGAMESTATE_AUDIOOPTIONS = 4,
+	EGAMESTATE_GRAPHICOPTIONS = 5,
+	EGAMESTATE_CONTROLOPTIONS = 6
 
 };
 //--------------------------------------------------------------------------------------
@@ -89,12 +88,6 @@ public:
 
 protected:
 
-	//Pointer to the player class to be used in the application2D
-	Player* player;
-	//Pointer to the block class to be used in the application2D
-	Block* block;
-	//Pointer to the environment class to be used in the application2D
-	Environment* bg;
 	//Pointer to renderer2D class to be used in the application2D
 	aie::Renderer2D*	m_2dRenderer;
 	//Pointer to the Font class to be used in the application2D

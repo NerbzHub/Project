@@ -4,8 +4,6 @@
 #include "Input.h"
 #include "Vector2.h"
 #include "CollisionManager.h"
-#include "Player.h"
-#include "Block.h"
 #include "ResourceManager.h"
 #include "Menu.h"
 #include "GameState.h"
@@ -60,17 +58,11 @@ bool Application2D::startup()
 	m_pResourceMan = new ResourceManager<Texture>();
 
 	m_pStateMachine = new StateMachine();
+	m_pStateMachine->PushState(EGAMESTATE_SPLASH);
 	m_pStateMachine->PushState(EGAMESTATE_MENU);
-	m_pStateMachine->PushState(EGAMESTATE_GAME);
 
 	//This creates the collision manager
 	CollisionManager::Create();
-
-	player = new Player();
-
-	block = new Block();
-
-	bg = new Environment();
 
 	m_2dRenderer = new Renderer2D();
 
@@ -81,6 +73,8 @@ bool Application2D::startup()
 	m_cameraX = 0;
 	m_cameraY = 0;
 	m_timer = 0;
+
+	ResourceManager<Texture>::Create();
 
 
 
@@ -103,9 +97,6 @@ void Application2D::shutdown()
 {
 	//This deletes the collision manager
 	CollisionManager::Destroy();
-	delete player;
-	delete bg;
-	delete block;
 	delete m_audio;
 	delete m_font;
 	delete m_2dRenderer;
@@ -120,9 +111,6 @@ void Application2D::shutdown()
 void Application2D::update(float deltaTime) 
 {
 	m_timer += deltaTime;
-
-	player->Update(deltaTime);
-	block->Update(deltaTime);
 
 	// input example
 	Input* input = Input::getInstance();
@@ -149,15 +137,6 @@ void Application2D::draw()
 
 	// begin drawing sprites
 	m_2dRenderer->begin();
-
-	//draw background
-	bg->Draw(m_2dRenderer);
-
-	//draw player
-	player->Draw(m_2dRenderer);
-
-	//draw car
-	block->Draw(m_2dRenderer);
 	
 	// output some text, uses the last used colour
 	char fps[32];

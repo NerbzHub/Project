@@ -8,11 +8,7 @@ template<typename T>
 class ResourceManager
 {
 public:
-	ResourceManager(){}
-	~ResourceManager()
-	{
-		UnloadAllResources();
-	}
+	
 
 	T* LoadResource(char* szFilename)
 	{
@@ -42,6 +38,37 @@ public:
 		m_ResourceList.Clear();
 	}
 
+	static void Create()
+	{
+		if (!m_pInstance)
+			m_pInstance = new ResourceManager<T>();
+	}
+
+	static void Destroy()
+	{
+		delete m_pInstance;
+	}
+
+	static ResourceManager<T>* GetInstance()
+	{
+		return m_pInstance;
+	}
+
+	ResourceManager() {}
+	~ResourceManager()
+	{
+		UnloadAllResources();
+	}
+
+private:
+
+	
+
 	DynamicArray<Resource<T>*> m_ResourceList;
+
+	static ResourceManager<T>* m_pInstance;
 };
+
+template<typename T>
+ResourceManager<T>* ResourceManager<T>::m_pInstance = nullptr;
 

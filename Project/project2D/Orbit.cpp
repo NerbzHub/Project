@@ -1,13 +1,13 @@
 #include "Orbit.h"
 #include "CollisionManager.h"
-
+#include "ResourceManager.h"
 
 //--------------------------------------------------------------------------------------
 // Constructor
 //--------------------------------------------------------------------------------------
 Orbit::Orbit()
 {
-	m_orbitTexture = new Texture("./textures/orbit.png");
+	m_orbitTexture = ResourceManager<Texture>::GetInstance()->LoadResource("./textures/orbit.png");
 
 	Matrix3 translate;
 	translate.M[2][0] = 20; //x

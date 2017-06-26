@@ -10,7 +10,7 @@ public:
 	{
 		int length = strlen(szFilename);
 		m_szFilename = new char[length + 1];
-		strcpy_s(m_szFilename, length, szFilename);
+		strcpy_s(m_szFilename, length + 1, szFilename);
 
 
 		m_pData = new T(szFilename);

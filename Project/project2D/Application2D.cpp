@@ -7,6 +7,7 @@
 #include "ResourceManager.h"
 #include "Menu.h"
 #include "GameState.h"
+#include "SplashScreen.h"
 
 using namespace aie;
 
@@ -42,29 +43,47 @@ Application2D::~Application2D()
 //--------------------------------------------------------------------------------------
 bool Application2D::startup() 
 {
+	ResourceManager<Texture>::Create();
+	m_pResourceMan = new ResourceManager<Texture>();
+	//This creates the collision manager
+	CollisionManager::Create();
+	m_2dRenderer = new Renderer2D();
+
+
 	Menu* menu = new Menu();
-	GameState* gameState = new GameState();
+	SplashScreen* splashScreen = new SplashScreen();
+	//GameState* gameState = new GameState();
+	/*while (EGAMESTATE_SPLASH)
+	{
+		splashScreen->OnDraw(m_2dRenderer);
+	}
+
 	while (EGAMESTATE_MENU)
 	{
 		menu->OnDraw(m_2dRenderer);
-	}
+	}*/
 
-	while (EGAMESTATE_GAME)
-	{
-		gameState->OnDraw(m_2dRenderer);
-	}
+	/*switch(1) {
+	case 1: (EGAMESTATE_SPLASH);
+		splashScreen->OnDraw(m_2dRenderer);
+		break;
+
+	case 2: (EGAMESTATE_MENU);
+		menu->OnDraw(m_2dRenderer);
+		break;
+
+	}*/
+
+
 
 	// Use this to create the Character Texture
-	m_pResourceMan = new ResourceManager<Texture>();
+	
 
 	m_pStateMachine = new StateMachine();
 	m_pStateMachine->PushState(EGAMESTATE_SPLASH);
 	m_pStateMachine->PushState(EGAMESTATE_MENU);
 
-	//This creates the collision manager
-	CollisionManager::Create();
-
-	m_2dRenderer = new Renderer2D();
+	
 
 	m_font = new Font("./font/consolas.ttf", 32);
 
@@ -74,7 +93,7 @@ bool Application2D::startup()
 	m_cameraY = 0;
 	m_timer = 0;
 
-	ResourceManager<Texture>::Create();
+	
 
 
 

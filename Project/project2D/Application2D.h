@@ -7,11 +7,12 @@
 #include "Renderer2D.h"
 #include "Audio.h"
 #include "ResourceManager.h"
-#include "StateMachine.h"
-#include "GameState.h"
-#include "State.h"
-#include "Stack.h"
 
+class Menu;
+class GameState;
+class SplashScreen;
+class StateMachine;
+class State;
 
 enum GameStateType
 {
@@ -97,6 +98,10 @@ protected:
 	//Pointer to the resource manager
 	ResourceManager<aie::Texture>* m_pResourceMan;
 	//Create State Machine
+	StateMachine* m_pStateMachine;
+
+	Menu* menu;
+	SplashScreen* splashScreen;
 
 
 	//Creating a float value for the camera's x and y position
@@ -104,5 +109,5 @@ protected:
 	//Creating a float for the timer
 	float m_timer;
 
-	StateMachine* m_pStateMachine;
+	
 };

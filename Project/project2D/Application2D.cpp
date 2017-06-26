@@ -2,12 +2,14 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-#include "Vector2.h"
+//#include "Vector2.h"
 #include "CollisionManager.h"
-#include "ResourceManager.h"
 #include "Menu.h"
 #include "GameState.h"
 #include "SplashScreen.h"
+
+#include "StateMachine.h"
+#include "State.h"
 
 using namespace aie;
 
@@ -50,8 +52,8 @@ bool Application2D::startup()
 	m_2dRenderer = new Renderer2D();
 
 
-	Menu* menu = new Menu();
-	SplashScreen* splashScreen = new SplashScreen();
+	menu = new Menu();
+	splashScreen = new SplashScreen();
 	//GameState* gameState = new GameState();
 	/*while (EGAMESTATE_SPLASH)
 	{
@@ -61,19 +63,10 @@ bool Application2D::startup()
 	while (EGAMESTATE_MENU)
 	{
 		menu->OnDraw(m_2dRenderer);
-	}*/
-
-	/*switch(1) {
-	case 1: (EGAMESTATE_SPLASH);
-		splashScreen->OnDraw(m_2dRenderer);
-		break;
-
-	case 2: (EGAMESTATE_MENU);
-		menu->OnDraw(m_2dRenderer);
-		break;
-
-	}*/
-
+	}
+*/
+	
+	
 
 
 	// Use this to create the Character Texture
@@ -134,6 +127,8 @@ void Application2D::update(float deltaTime)
 	// input example
 	Input* input = Input::getInstance();
 
+	// 
+
 	//example of audio
 	if (input->wasKeyPressed(INPUT_KEY_SPACE))
 		m_audio->play();
@@ -157,6 +152,18 @@ void Application2D::draw()
 	// begin drawing sprites
 	m_2dRenderer->begin();
 	
+	switch (1) {
+
+	case 1: (EGAMESTATE_SPLASH);
+		splashScreen->OnDraw(m_2dRenderer);
+			break;
+
+	case 2: (EGAMESTATE_MENU);
+		menu->OnDraw(m_2dRenderer);
+		break;
+
+	}
+
 	// output some text, uses the last used colour
 	char fps[32];
 	sprintf_s(fps, 32, "FPS: %i", getFPS());

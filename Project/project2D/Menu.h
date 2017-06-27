@@ -12,7 +12,7 @@ public:
 	virtual ~Menu();
 
 	void OnEnter();
-	void OnUpdate(float deltaTime);
+	void OnUpdate(float deltaTime, StateMachine* stateMachine);
 	void OnDraw(aie::Renderer2D* m_2dRenderer);
 	void OnExit();
 	void UpdateTransform();

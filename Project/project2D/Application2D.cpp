@@ -54,6 +54,7 @@ bool Application2D::startup()
 
 	menu = new Menu();
 	splashScreen = new SplashScreen();
+
 	//GameState* gameState = new GameState();
 	/*while (EGAMESTATE_SPLASH)
 	{
@@ -73,8 +74,11 @@ bool Application2D::startup()
 	
 
 	m_pStateMachine = new StateMachine();
+	m_pStateMachine->RegisterState(splashScreen, EGAMESTATE_SPLASH);
+	m_pStateMachine->RegisterState(menu, EGAMESTATE_MENU);
+
 	m_pStateMachine->PushState(EGAMESTATE_SPLASH);
-	m_pStateMachine->PushState(EGAMESTATE_MENU);
+	//m_pStateMachine->PushState(EGAMESTATE_MENU);
 
 	
 
@@ -85,10 +89,6 @@ bool Application2D::startup()
 	m_cameraX = 0;
 	m_cameraY = 0;
 	m_timer = 0;
-
-	
-
-
 
 	return true;
 }
@@ -128,6 +128,17 @@ void Application2D::update(float deltaTime)
 	Input* input = Input::getInstance();
 
 	// 
+	switch (1) {
+
+	case 1: (EGAMESTATE_SPLASH);
+		splashScreen->OnUpdate(deltaTime, m_pStateMachine);
+		break;
+
+	case 2: (EGAMESTATE_MENU);
+		menu->OnUpdate(deltaTime, m_pStateMachine);
+		break;
+
+	}
 
 	//example of audio
 	if (input->wasKeyPressed(INPUT_KEY_SPACE))
@@ -151,24 +162,14 @@ void Application2D::draw()
 
 	// begin drawing sprites
 	m_2dRenderer->begin();
-	
-	switch (1) {
 
-	case 1: (EGAMESTATE_SPLASH);
-		splashScreen->OnDraw(m_2dRenderer);
-			break;
+	m_pStateMachine->Draw(m_2dRenderer);
 
-	case 2: (EGAMESTATE_MENU);
-		menu->OnDraw(m_2dRenderer);
-		break;
-
-	}
-
-	// output some text, uses the last used colour
-	char fps[32];
-	sprintf_s(fps, 32, "FPS: %i", getFPS());
-	m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
-	m_2dRenderer->drawText(m_font, "Press Space for sound!", 0, 720 - 64);
+	//// output some text, uses the last used colour
+	//char fps[32];
+	//sprintf_s(fps, 32, "FPS: %i", getFPS());
+	//m_2dRenderer->drawText(m_font, fps, 0, 720 - 32);
+	//m_2dRenderer->drawText(m_font, "Press Space for sound!", 0, 720 - 64);
 
 	// done drawing sprites
 	m_2dRenderer->end();

@@ -17,7 +17,7 @@ void StateMachine::Update(float fDeltaTime)
 	if (m_StateList.Size() <= 0)
 		return;
 
-	m_StateList[m_nCurrentState]->OnUpdate(fDeltaTime);
+	m_StateList[m_nCurrentState]->OnUpdate(fDeltaTime, this);
 }
 
 void StateMachine::Draw(Renderer2D* m_2dRenderer)
@@ -27,7 +27,7 @@ void StateMachine::Draw(Renderer2D* m_2dRenderer)
 
 void StateMachine::PushState(int nStateIndex)
 {
-
+	
 }
 
 void StateMachine::RegisterState(State* state, int nStateIndex)

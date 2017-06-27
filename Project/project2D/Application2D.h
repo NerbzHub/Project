@@ -7,6 +7,7 @@
 #include "Renderer2D.h"
 #include "Audio.h"
 #include "ResourceManager.h"
+#include "Define.h"
 
 class Menu;
 class GameState;
@@ -14,17 +15,7 @@ class SplashScreen;
 class StateMachine;
 class State;
 
-enum GameStateType
-{
-	EGAMESTATE_SPLASH = 0,
-	EGAMESTATE_MENU = 1,
-	EGAMESTATE_GAME = 2,
-	EGAMESTATE_OPTIONS = 3,
-	EGAMESTATE_AUDIOOPTIONS = 4,
-	EGAMESTATE_GRAPHICOPTIONS = 5,
-	EGAMESTATE_CONTROLOPTIONS = 6
 
-};
 //--------------------------------------------------------------------------------------
 // Application2D class
 // Stores functions and data used by the class

@@ -1,2 +1,12 @@
-﻿  Application2D.cpp
+﻿  StateMachine.cpp
+  CollisionManager.cpp
+l:\git\project\project2d\collisionmanager.cpp(80): warning C4018: '<': signed/unsigned mismatch
+  Application2D.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+  SplashScreen.cpp
+  Menu.cpp
+  Loading.cpp
+  Generating Code...
   Project2D.vcxproj -> L:\Git\Project\temp\Project2D\Debug\Project2D.exe

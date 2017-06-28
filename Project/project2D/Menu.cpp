@@ -28,15 +28,18 @@ void Menu::OnEnter()
 
 }
 
-void Menu::OnUpdate(float deltaTime, StateMachine* stateMachine)
+int Menu::OnUpdate(float deltaTime, StateMachine* stateMachine)
 {
 	m_fTimer += deltaTime;
+	return 0;
 }
 
-void Menu::OnDraw(aie::Renderer2D* m_2dRenderer)
+int Menu::OnDraw(aie::Renderer2D* m_2dRenderer)
 {
 	m_2dRenderer->drawSprite(m_menuTexture, 640, 360, 0, 0, 0, 1);
+	return 0;
 }
+
 void Menu::OnExit()
 {
 

@@ -1,5 +1,7 @@
 #pragma once
 #include <memory.h>
+#include <crtdbg.h>
+#include "Define.h"
 template <typename T>
 
 class DynamicArray
@@ -12,6 +14,7 @@ public:
 		if (nCapacity <= 0)
 			nCapacity = 1;
 		m_pData = new T[nCapacity];
+		_ASSERT(m_pData);
 		m_nCapacity = nCapacity;
 		m_nUsed = 0;
 		memset(&m_nNullValue, 0, sizeof(T));
@@ -29,6 +32,7 @@ public:
 		m_nUsed = other.m_nUsed;
 
 		m_pData = new T[m_nCapacity];
+		_ASSERT(m_pData);
 		memcpy(m_pData, other.m_pData, sizeof(T) * m_nCapacity);
 	}
 
@@ -45,10 +49,11 @@ public:
 		Insert(0, value);
 	}
 
-	void Insert(int index, T value)
+	int Insert(int index, T value)
 	{
+		_ASSERT(index <= m_nUsed);
 		if (index > m_nUsed)
-			return;
+			return OUT_OF_ARRAY_ACCESS;
 
 		if (m_nUsed >= m_nCapacity)
 			Resize();
@@ -62,10 +67,14 @@ public:
 
 		m_pData[index] = value;
 		++m_nUsed;
+
+		return SUCCESS;
 	}
 
 	T PopBack()
 	{
+		_ASSERT(m_nUsed > 0);
+
 		if (m_nUsed <= 0)
 			return m_nNullValue;
 
@@ -75,6 +84,7 @@ public:
 
 	T Remove(int index)
 	{
+		_ASSERT(index <= m_nUsed);
 		if (index >= m_nUsed)
 			return m_nNullValue;
 
@@ -105,10 +115,12 @@ public:
 	void Shrink()
 	{
 		int nCapacity = m_nUsed;
+		_ASSERT(nCapacity > 0);
 		if (nCapacity <= 0)
 			nCapacity = 1;
 
 		T* newData = new T[m_nUsed];
+		_ASSERT(newData);
 		memcpy(newData, m_pData, sizeof(T) * m_nUsed);
 		delete m_pData;
 		m_pData = newData;
@@ -117,6 +129,7 @@ public:
 
 	T& operator[](const int index)
 	{
+		_ASSERT(index < m_nUsed);
 		if (index >= m_nUsed)
 			return m_nNullValue;
 		return m_pData[index];
@@ -142,6 +155,7 @@ private:
 	{
 		//Creates new array that is twice as big
 		T* newData = new T[m_nCapacity * 2];
+		_ASSERT(newData);
 
 		//copy old data across ubit new array
 		memcpy(newData, m_pData, sizeof(T) * m_nCapacity);

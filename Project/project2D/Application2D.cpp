@@ -2,7 +2,6 @@
 #include "Texture.h"
 #include "Font.h"
 #include "Input.h"
-//#include "Vector2.h"
 #include "CollisionManager.h"
 #include "Menu.h"
 #include "GameState.h"
@@ -47,14 +46,19 @@ bool Application2D::startup()
 {
 	ResourceManager<Texture>::Create();
 	m_pResourceMan = new ResourceManager<Texture>();
+	_ASSERT(m_pResourceMan);
+
 	//This creates the collision manager
 	CollisionManager::Create();
 	m_2dRenderer = new Renderer2D();
-
+	_ASSERT(m_2dRenderer);
 
 	menu = new Menu();
+	_ASSERT(menu);
 	splashScreen = new SplashScreen();
+	_ASSERT(splashScreen);
 	loading = new Loading();
+	_ASSERT(loading);
 
 	//GameState* gameState = new GameState();
 	/*while (EGAMESTATE_SPLASH)
@@ -67,14 +71,12 @@ bool Application2D::startup()
 		menu->OnDraw(m_2dRenderer);
 	}
 */
-	
-	
-
 
 	// Use this to create the Character Texture
 	
 
 	m_pStateMachine = new StateMachine();
+	_ASSERT(m_pStateMachine);
 	m_pStateMachine->RegisterState(splashScreen, EGAMESTATE_SPLASH);
 	m_pStateMachine->RegisterState(menu, EGAMESTATE_MENU);
 	m_pStateMachine->RegisterState(loading, EGAMESTATE_LOADING);
@@ -83,8 +85,10 @@ bool Application2D::startup()
 	m_pStateMachine->PushState(EGAMESTATE_SPLASH);
 
 	m_font = new Font("./font/consolas.ttf", 32);
+	_ASSERT(m_font);
 
 	m_audio = new Audio("./audio/powerup.wav");
+	_ASSERT(m_audio);
 
 	m_cameraX = 0;
 	m_cameraY = 0;

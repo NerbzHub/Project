@@ -34,6 +34,7 @@ void CollisionManager::Create()
 {
 	if(!m_instance)
 		m_instance = new CollisionManager();
+	_ASSERT(m_instance);
 }
 
 //--------------------------------------------------------------------------------------

@@ -18,8 +18,8 @@ public:
 	virtual ~SplashScreen();
 
 	void OnEnter();
-	void OnUpdate(float deltaTime, StateMachine* stateMachine);
-	void OnDraw(aie::Renderer2D* m_2dRenderer);
+	int OnUpdate(float deltaTime, StateMachine* stateMachine);
+	int OnDraw(aie::Renderer2D* m_2dRenderer);
 	void OnExit();
 	void UpdateTransform();
 

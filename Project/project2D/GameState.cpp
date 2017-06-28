@@ -15,13 +15,13 @@ void GameState::OnEnter()
 {
 
 }
-void GameState::OnUpdate(float fDeltaTime)
+int GameState::OnUpdate(float fDeltaTime)
 {
-
+	return 0;
 }
-void GameState::OnDraw(aie::Renderer2D* m_2dRenderer)
+int GameState::OnDraw(aie::Renderer2D* m_2dRenderer)
 {
-
+	return 0;
 }
 void GameState::OnExit()
 {

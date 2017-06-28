@@ -47,7 +47,7 @@ public:
 
 	void Insert(int index, T value)
 	{
-		if (index >= m_nUsed)
+		if (index > m_nUsed)
 			return;
 
 		if (m_nUsed >= m_nCapacity)

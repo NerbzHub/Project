@@ -7,9 +7,9 @@
 #include "Menu.h"
 #include "GameState.h"
 #include "SplashScreen.h"
-
 #include "StateMachine.h"
 #include "State.h"
+#include "Loading.h"
 
 using namespace aie;
 
@@ -54,6 +54,7 @@ bool Application2D::startup()
 
 	menu = new Menu();
 	splashScreen = new SplashScreen();
+	loading = new Loading();
 
 	//GameState* gameState = new GameState();
 	/*while (EGAMESTATE_SPLASH)
@@ -76,11 +77,10 @@ bool Application2D::startup()
 	m_pStateMachine = new StateMachine();
 	m_pStateMachine->RegisterState(splashScreen, EGAMESTATE_SPLASH);
 	m_pStateMachine->RegisterState(menu, EGAMESTATE_MENU);
+	m_pStateMachine->RegisterState(loading, EGAMESTATE_LOADING);
+	
 
 	m_pStateMachine->PushState(EGAMESTATE_SPLASH);
-	//m_pStateMachine->PushState(EGAMESTATE_MENU);
-
-	
 
 	m_font = new Font("./font/consolas.ttf", 32);
 
@@ -124,11 +124,13 @@ void Application2D::update(float deltaTime)
 {
 	m_timer += deltaTime;
 
+	m_pStateMachine->Update(deltaTime);
+
 	// input example
 	Input* input = Input::getInstance();
 
 	// 
-	switch (1) {
+	/*switch (1) {
 
 	case 1: (EGAMESTATE_SPLASH);
 		splashScreen->OnUpdate(deltaTime, m_pStateMachine);
@@ -138,7 +140,7 @@ void Application2D::update(float deltaTime)
 		menu->OnUpdate(deltaTime, m_pStateMachine);
 		break;
 
-	}
+	}*/
 
 	//example of audio
 	if (input->wasKeyPressed(INPUT_KEY_SPACE))

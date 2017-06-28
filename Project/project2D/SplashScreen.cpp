@@ -32,9 +32,9 @@ void SplashScreen::OnUpdate(float deltaTime, StateMachine* stateMachine)
 {
 	m_fTimer += deltaTime;
 
-	if (m_fTimer > 5)
+	if (m_fTimer > 3)
 	{
-		stateMachine->PushState(EGAMESTATE_MENU);
+		stateMachine->PushState(EGAMESTATE_LOADING);
 	}
 	
 }

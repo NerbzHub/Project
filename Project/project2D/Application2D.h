@@ -9,6 +9,7 @@
 #include "ResourceManager.h"
 #include "Define.h"
 
+class Loading;
 class Menu;
 class GameState;
 class SplashScreen;
@@ -93,6 +94,7 @@ protected:
 
 	Menu* menu;
 	SplashScreen* splashScreen;
+	Loading* loading;
 
 
 	//Creating a float value for the camera's x and y position
